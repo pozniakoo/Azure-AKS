@@ -12,12 +12,9 @@ provider "azurerm" {
   features {}
 }
 
-resource "random_string" "random" {
-  length  = 3
-  special = false
-  numeric = true
-  lower   = false 
-  upper   = false
+resource "random_integer" "random" {
+  min = 100
+  max = 999
 }
 
 resource "azurerm_resource_group" "tfstate-rg" {
@@ -27,7 +24,7 @@ resource "azurerm_resource_group" "tfstate-rg" {
 
 
 resource "azurerm_storage_account" "tfstate-storage" {
-  name                     = "${var.storage_name}${random_string.random.result}"
+  name                     = "${var.storage_name}${random_integer.random.result}"
   resource_group_name      = azurerm_resource_group.tfstate-rg.name
   location                 = azurerm_resource_group.tfstate-rg.location
   account_tier             = "Standard"
