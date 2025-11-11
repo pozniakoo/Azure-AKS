@@ -1,0 +1,61 @@
+name: 'Terraform PR: Validate & Plan'
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Terraform/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          creds: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: 🛠️ Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: 🔄 Terraform Init 
+        working-directory: ./Terraform
+        run: terraform Init
+
+      - name: 🧹 Terraform Fmt Check
+        working-directory: ./Terraform
+        run: terraform fmt -check
+
+      - name: ✅ Terraform Validate
+        working-directory: ./Terraform
+        run: terraform validate
+
+      - name: 📝 Terraform Plan
+        working-directory: ./Terraform
+        run: terraform plan -no-color -out=tfplan | tee plan_output.txt
+      
+      - name: 💬 Publish Plan to PR
+        uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const fs = require('fs');
+            const plan_raw = fs.readFileSync('Terraform/plan_output.txt', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+              body: 📝 Terraform Plan Result:\n\n```hcl\n' + plan_raw + '\n```'
+            })

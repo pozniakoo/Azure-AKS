@@ -1,0 +1,5 @@
+location       = "northeurope"
+state_rg       = "tfstate-rg"
+storage_name   = "tfstatestorage"
+container_name = "tfstate"
+subscription_id = "bc93f05c-022a-4e2b-8623-713ed612e1e9"

@@ -1,0 +1,43 @@
+name: 'Terraform main deployment'
+
+on:
+    push:
+        branches:
+            - main
+        paths: 
+            - 'Terraform/**'
+
+permissions:
+    contents: read
+
+jobs:
+    apply:
+        runs-on: ubuntu-latest
+        environment:
+            name: Production
+            url: ${{ steps.deploy.outputs.external_url }}
+
+        steps:
+            - name: 📦 Checkout Code
+              uses: actions/checkout@v4
+
+            - name: 🔑 Azure Login
+              uses: azure/login@v1
+              with:
+                client-id: ${{ secrets.AZURE_CLIENT_ID }}
+                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                creds: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+            - name: 🛠️ Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+
+            - name: 🔄 Terraform Init
+              working-directory: ./Terraform
+              run: terraform init
+
+            - name: 🚀 Terraform Apply
+              id: deploy
+              working-directory: ./Terraform
+              run: terraform apply -auto-approve
