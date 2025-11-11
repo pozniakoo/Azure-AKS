@@ -28,7 +28,7 @@ jobs:
 
       - name: 🔄 Terraform Init 
         working-directory: ./Terraform
-        run: terraform Init
+        run: terraform init
 
       - name: 🧹 Terraform Fmt Check
         working-directory: ./Terraform
