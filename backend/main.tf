@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "azurerm"{
-    resource_group_name = azurerm_resource_group.tfstate-rg.name
-    storage_account_name = azurerm_storage_account.tfstate-storage.name
-    container = azurerm_storage_container.tfstate-container.name
-    key = backend-state.tfstate
+    resource_group_name = "tfstate-rg"
+    storage_account_name = "szymon-tfstate-storage"
+    container = "tfstate"
+    key = "backend-state.tfstate"
   }
 }
 
@@ -32,7 +32,7 @@ resource "azurerm_resource_group" "tfstate-rg" {
 
 
 resource "azurerm_storage_account" "tfstate-storage" {
-  name                     = "${var.storage_name}${random_integer.random.result}"
+  name                     = var.storage_name
   resource_group_name      = azurerm_resource_group.tfstate-rg.name
   location                 = azurerm_resource_group.tfstate-rg.location
   account_tier             = "Standard"
@@ -41,6 +41,6 @@ resource "azurerm_storage_account" "tfstate-storage" {
 
 resource "azurerm_storage_container" "tfstate-container" {
   name                  = var.container_name
-  storage_account_name    = azurerm_storage_account.tfstate-storage.name
+  storage_account_id = azurerm_storage_account.tfstate-storage.id
   container_access_type = "private"
 }
