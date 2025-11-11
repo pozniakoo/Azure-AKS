@@ -16,6 +16,8 @@ resource "random_string" "random" {
   length  = 3
   special = false
   numeric = true
+  lower   = false 
+  upper   = false
 }
 
 resource "azurerm_resource_group" "tfstate-rg" {
