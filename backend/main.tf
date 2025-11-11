@@ -5,12 +5,6 @@ terraform {
       version = "~>4.1.0"
     }
   }
-  backend "azurerm"{
-    resource_group_name = "tfstate-rg"
-    storage_account_name = "szymon-tfstate-storage"
-    container_name = "tfstate"
-    key = "backend-state.tfstate"
-  }
 }
 
 provider "azurerm" {
@@ -32,7 +26,7 @@ resource "azurerm_resource_group" "tfstate-rg" {
 
 
 resource "azurerm_storage_account" "tfstate-storage" {
-  name                     = var.storage_name
+  name                     = "${var.storage_name}${random_integer.random.result}"
   resource_group_name      = azurerm_resource_group.tfstate-rg.name
   location                 = azurerm_resource_group.tfstate-rg.location
   account_tier             = "Standard"
