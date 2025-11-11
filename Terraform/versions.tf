@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name = "tfstate-rg"
+    resource_group_name  = "tfstate-rg"
     storage_account_name = "tfstatestorage790"
-    container_name = "tfstate"
-    key = "main-project.tfstate"
+    container_name       = "tfstate"
+    key                  = "main-project.tfstate"
   }
 }
 
