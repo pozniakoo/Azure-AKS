@@ -5,12 +5,20 @@ terraform {
       version = "~>4.1.0"
     }
   }
+  backend "azurerm"{
+    resource_group_name = azurerm_resource_group.tfstate-rg.name
+    storage_account_name = azurerm_storage_account.tfstate-storage.name
+    container = azurerm_storage_container.tfstate-container.name
+    key = backend-state.tfstate
+  }
 }
 
 provider "azurerm" {
   subscription_id = var.subscription_id
   features {}
 }
+
+
 
 resource "random_integer" "random" {
   min = 100
