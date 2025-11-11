@@ -1,0 +1,9 @@
+# Terraform State Files and Lock Files
+*.tfstate
+*.tfstate.*
+# Odrzuć cały folder tymczasowy .terraform
+.terraform/
+.terraform.lock.hcl
+# Binarki providerów są największe i są w tym folderze
+Terraform/.terraform/
+backend/.terraform/
