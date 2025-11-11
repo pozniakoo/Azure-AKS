@@ -1,4 +1,4 @@
-name: 'Terraform PR: Validate & Plan'
+name: '02 - Terraform PR: Validate & Plan'
 
 on:
   pull_request:
