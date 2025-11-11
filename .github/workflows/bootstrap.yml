@@ -1,4 +1,4 @@
-name: 'Azure Backend Bootstrap'
+name: '01 - Azure Backend Bootstrap'
 
 on:
   workflow_dispatch:

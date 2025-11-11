@@ -1,0 +1,42 @@
+name: '99 - Destroy infrastructure'
+
+on: 
+    workflow_dispatch:
+        inputs:
+            confirm_destroy:
+                description: '⚠️ Confirmation: Type "DESTROY" to destroy Azure resources'
+                required: true
+                default: 'NO'
+
+permissions:
+    contents: read
+
+jobs:
+    destroy:
+        runs-on: ubuntu-latest
+        environment: Production
+        
+        if: github.event.inputs.confirm_destroy == 'DESTROY'
+
+        steps:
+            - name: 🛑 Destroy confirmation
+              run: echo "Destruction confirmed. All Azure resources will be removed"
+
+            - name: 📦 Checkout Code
+              uses: actions/checkout@v4
+
+            - name: 🔑 Azure Login
+              uses: azure/login@v1
+              with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+            
+            - name: 🛠️ Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: 🔄 Terraform Init
+              working-directory: ./Terraform
+              run: terraform init
+
+            - name: 💥 Terraform DESTROY 
+              working-directory: ./Terraform
+              run: terraform destroy -auto-approve tfdestroyplan
