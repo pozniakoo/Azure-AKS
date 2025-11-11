@@ -1,0 +1,39 @@
+name: 'Destroy backend storage'
+
+on: 
+    workflow_dispatch:
+        inputs:
+            confirm_destroy:
+                description: 'Wpisz "DESTROY_BACKEND" aby usunąć backend'
+
+permissions:
+    contents: read
+
+jobs:
+    destroy_backend:
+        runs-on: ubuntu-latest
+        environment: Production
+        if: github.event.inputs.confirm_destroy == 'DESTROY_BACKEND'
+
+        steps:
+            - name: 🛑 Destroy confirmation
+              run: echo 'Backend destruction confirmed'
+            
+            - name: 📦 Checkout Code
+              uses: actions/checkout@v4
+
+            - name: 🔑 Azure Login
+              uses: azure/login@v1
+              with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+            
+            - name: 🛠️ Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: 🔄 Terraform Init
+              working-directory: ./backend
+              run: terraform init
+
+            - name: 💥 Terraform DESTROY backend
+              working-directory: ./backend
+              run: terraform destroy -var-file="terraform.tfvars" -auto-approve
