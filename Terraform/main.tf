@@ -23,7 +23,7 @@ module "k8s" {
   aks_cluster_name  = var.aks_cluster_name
   dns_prefix        = var.dns_prefix
   aks_service_cidr  = var.aks_service_cidr
-  kube_dns_ip = var.kube_dns_ip
+  kube_dns_ip       = var.kube_dns_ip
 }
 
 
