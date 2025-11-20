@@ -4,11 +4,11 @@ output "vnet_id" {
 }
 
 output "aks_subnet_id" {
-  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "aks-subnet_10.0.0.0_24"][0]
+  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "aks-subnet-10.0.0.0_24"][0]
 }
 
 output "pe_subnet_id" {
-  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "privendpoint-subnet_10.0.1.16_29"][0]
+  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "privendpoint-subnet-10.0.1.16_29"][0]
 }
 
 output "network_rg_name" {
