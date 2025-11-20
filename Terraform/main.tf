@@ -24,7 +24,6 @@ module "k8s" {
   dns_prefix        = var.dns_prefix
   aks_service_cidr  = var.aks_service_cidr
   kube_dns_ip       = var.kube_dns_ip
-  #nat_gateway_id = var.nat_gateway_id
 }
 
 
