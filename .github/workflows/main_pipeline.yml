@@ -13,9 +13,6 @@ permissions:
 jobs:
     apply:
         runs-on: ubuntu-latest
-        environment:
-            name: Development
-            url: ${{ steps.deploy.outputs.external_url }}
 
         steps:
             - name: 📦 Checkout Code
