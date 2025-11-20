@@ -14,7 +14,7 @@ permissions:
 jobs:
     destroy:
         runs-on: ubuntu-latest
-        environment: Production
+        environment: development
         
         if: github.event.inputs.confirm_destroy == 'DESTROY'
 

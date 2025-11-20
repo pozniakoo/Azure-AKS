@@ -14,7 +14,7 @@ jobs:
     apply:
         runs-on: ubuntu-latest
         environment:
-            name: Production
+            name: development
             url: ${{ steps.deploy.outputs.external_url }}
 
         steps:
