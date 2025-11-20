@@ -16,7 +16,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     network_policy = "calico"
     service_cidr = var.aks_service_cidr
     dns_service_ip = var.kube_dns_ip
+    outbound_type = "userAssignedNATGateway"
   }
+  
   private_cluster_enabled = true
   private_dns_zone_id = "System"
 

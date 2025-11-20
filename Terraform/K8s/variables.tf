@@ -62,3 +62,9 @@ variable "kube_dns_ip" {
   description = "kube-dns IP address"
   type = string
 }
+
+/*variable "nat_gateway_id" {
+  description = "ID of NAT Gateway"
+  type = string
+}
+*/

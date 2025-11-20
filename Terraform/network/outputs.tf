@@ -18,3 +18,7 @@ output "network_rg_name" {
 output "acr_dns_zone_name" {
   value = azurerm_private_dns_zone.acr_dns.name
 }
+
+output "nat_gateway_id" {
+  value = azurerm_nat_gateway.natgw.id
+}
