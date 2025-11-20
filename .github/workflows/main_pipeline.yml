@@ -12,8 +12,10 @@ permissions:
 
 jobs:
     apply:
+        environment:
+          name: Development
+          url: ${{ steps.deploy.outputs.external_url }}
         runs-on: ubuntu-latest
-
         steps:
             - name: 📦 Checkout Code
               uses: actions/checkout@v4

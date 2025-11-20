@@ -14,9 +14,8 @@ permissions:
 jobs:
     destroy:
         runs-on: ubuntu-latest
-        
+        environment: Development
         if: github.event.inputs.confirm_destroy == 'DESTROY'
-
         steps:
             - name: 🛑 Destroy confirmation
               run: echo "Destruction confirmed. All Azure resources will be removed"

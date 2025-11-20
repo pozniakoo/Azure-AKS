@@ -13,7 +13,7 @@ jobs:
     destroy_backend:
         runs-on: ubuntu-latest
         if: github.event.inputs.confirm_destroy == 'DESTROY_BACKEND'
-
+        environment: 'Development'
         steps:
             - name: 🛑 Destroy confirmation
               run: echo 'Backend destruction confirmed'
