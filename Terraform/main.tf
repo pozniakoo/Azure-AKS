@@ -36,3 +36,9 @@ module "network" {
   location          = var.location
   acr_registry_name = var.acr_registry_name
 }
+
+module "storage" {
+  source = "./modules/storage"
+  
+  location = var.location
+}
