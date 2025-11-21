@@ -37,7 +37,7 @@ resource "azurerm_key_vault" "akv" {
 
 resource "azurerm_key_vault_secret" "jumphost01_ssh_key" {
   name         = "jumphost01-ssh-pubkey"
-  value        = file("~/.ssh/id_rsa.pub")
+  value        = var.jumphost_ssh_public_key
   content_type = "text/plain"
   key_vault_id = azurerm_key_vault.akv.id
 }
