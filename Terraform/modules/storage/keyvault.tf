@@ -30,13 +30,13 @@ resource "azurerm_key_vault" "akv" {
       "Get",
     ]
 
-    /*secret_permissions = [
+    secret_permissions = [
       "Get",
     ]
 
     storage_permissions = [
       "Get",
-    ]*/
+    ]
   }
 }
 
