@@ -76,3 +76,8 @@ variable "jumphost_subnet_id" {
   description = "JumphostSubnet ID"
   type = string
 }
+
+variable "jumphost_ssh_key" {
+  description = "Public SSH key for jumphost, stored in AKV"
+  type = string
+}

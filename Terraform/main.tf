@@ -27,6 +27,7 @@ module "k8s" {
   aks_service_cidr   = var.aks_service_cidr
   kube_dns_ip        = var.kube_dns_ip
   appgw_id           = module.network.appgw_id
+  jumphost_ssh_key   = module.storage.jumphost_ssh_public_key
 }
 
 
@@ -39,6 +40,6 @@ module "network" {
 
 module "storage" {
   source = "./modules/storage"
-  
+
   location = var.location
 }

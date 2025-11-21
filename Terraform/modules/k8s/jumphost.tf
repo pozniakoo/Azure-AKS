@@ -37,7 +37,7 @@ resource "azurerm_linux_virtual_machine" "jumphost01" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = azurerm_key_vault_secret.jumphost01_ssh_key.value
+    public_key = var.jumphost_ssh_key
   }
 
   os_disk {
