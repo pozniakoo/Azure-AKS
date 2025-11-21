@@ -1,4 +1,4 @@
-subscription_id   = "3f688fb2-c312-4e41-a7a2-7929d24ec687"
+subscription_id   = "bc93f05c-022a-4e2b-8623-713ed612e1e9"
 location          = "North Europe"
 acr_registry_name = "szymonctainerregistry01"
 node_size         = "Standard_B2s"
