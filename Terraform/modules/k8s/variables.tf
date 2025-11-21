@@ -3,7 +3,7 @@ variable "location"{
     type = string
 }
 
-variable "rg_name" {
+variable "aks_rg_name" {
   description = "Resource Group name"
   type = string
 }
@@ -60,5 +60,24 @@ variable "aks_service_cidr" {
 
 variable "kube_dns_ip" {
   description = "kube-dns IP address"
+  type = string
+}
+
+variable "appgw_id" {
+  description = "Application gateway ID"
+  type = string
+}
+
+variable "bastion_subnet_id" {
+  description = "BastionSubnet ID"
+  type = string
+}
+variable "jumphost_subnet_id" {
+  description = "JumphostSubnet ID"
+  type = string
+}
+
+variable "jumphost_ssh_key" {
+  description = "Public SSH key for jumphost, stored in AKV"
   type = string
 }

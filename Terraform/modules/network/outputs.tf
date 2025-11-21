@@ -11,10 +11,27 @@ output "pe_subnet_id" {
   value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "privendpoint-subnet-10.0.1.16_29"][0]
 }
 
+output "bastion_subnet_id" {
+  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "AzureBastionSubnet"][0]
+}
+
+output "jumphost_subnet_id" {
+  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "jumphost-subnet-10.0.1.48/29"][0]
+}
+
 output "network_rg_name" {
   value = azurerm_resource_group.network_rg.name
 }
 
 output "acr_dns_zone_name" {
   value = azurerm_private_dns_zone.acr_dns.name
+}
+
+output "nat_gateway_id" {
+  value = azurerm_nat_gateway.natgw.id
+}
+
+output "appgw_id" {
+  description = "ID of the application gateway used for AKS"
+  value = azurerm_application_gateway.appgw.id
 }

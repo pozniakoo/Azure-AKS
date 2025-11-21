@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
   name                = var.aks_cluster_name
   location            = var.location
-  resource_group_name = var.rg_name
+  resource_group_name = var.aks_rg_name
   dns_prefix          = var.dns_prefix
 
   default_node_pool {
@@ -16,7 +16,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     network_policy = "calico"
     service_cidr = var.aks_service_cidr
     dns_service_ip = var.kube_dns_ip
+    outbound_type = "userAssignedNATGateway"
   }
+  
   private_cluster_enabled = true
   private_dns_zone_id = "System"
 
@@ -24,13 +26,14 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     type = "SystemAssigned"
   }
 
-  tags = {
+  ingress_application_gateway {
+    gateway_id = var.appgw_id
   }
 }
 
 resource "azurerm_container_registry" "acr" {
   name                = var.acr_registry_name
-  resource_group_name = var.rg_name
+  resource_group_name = var.aks_rg_name
   location            = var.location 
 
   sku                 = "Premium" #Premium SKU is required for private connection
@@ -51,7 +54,7 @@ resource "azurerm_role_assignment" "aks_acr_assignment" {
 resource "azurerm_private_endpoint" "acr_pe" {
   name                = "${var.acr_registry_name}-pe"
   location            = var.location
-  resource_group_name = var.rg_name
+  resource_group_name = var.aks_rg_name
   subnet_id           = var.pe_subnet_id
 
   private_service_connection {

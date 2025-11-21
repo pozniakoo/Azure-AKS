@@ -4,3 +4,4 @@
 .terraform.lock.hcl
 Terraform/.terraform/
 backend/.terraform/
+id_rsa.pub
