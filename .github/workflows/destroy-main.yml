@@ -20,6 +20,7 @@ jobs:
         environment: Development
         if: github.event.inputs.confirm_destroy == 'DESTROY'
         steps:
+
             - name: 🛑 Destroy confirmation
               run: echo "Destruction confirmed. All Azure resources will be removed"
 
@@ -30,7 +31,11 @@ jobs:
               uses: azure/login@v1
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
-            
+              
+            - name: force unlock #temporary
+              id: unlock
+              run: terraform force-unlock 92f38bf0-d86f-3cb3-2572-e82b5aa776cf
+
             - name: 🛠️ Setup Terraform
               uses: hashicorp/setup-terraform@v3
 
