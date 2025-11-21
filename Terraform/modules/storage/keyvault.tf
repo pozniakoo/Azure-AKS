@@ -6,8 +6,13 @@ resource "azurerm_resource_group" "key_vault_rg" {
   location = var.location
 }
 
+resource "random_integer" "random" {
+  min = 100
+  max = 999
+}
+
 resource "azurerm_key_vault" "akv" {
-  name                        = "akv"
+  name                        = "azkeyvault${random_integer.random.result}"
   location                    = var.location
   resource_group_name         = azurerm_resource_group.key_vault_rg.name
   enabled_for_disk_encryption = true

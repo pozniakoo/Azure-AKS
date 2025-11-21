@@ -36,7 +36,7 @@ resource "azurerm_virtual_network" "vnet" {
 
   subnet {
     name = "jumphost-subnet-10.0.1.48/29"
-    address_prefixes = ["10.0.1.48/29"]
+    address_prefixes = ["10.0.1.64/29"]
   }
 }
 
