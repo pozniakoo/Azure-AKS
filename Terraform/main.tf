@@ -41,5 +41,6 @@ module "network" {
 module "storage" {
   source = "./modules/storage"
 
-  location = var.location
+  location                = var.location
+  jumphost_ssh_public_key = var.jumphost_ssh_public_key
 }

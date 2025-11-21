@@ -37,3 +37,8 @@ variable "kube_dns_ip" {
   description = "kube-dns IP address"
   type        = string
 }
+
+variable "jumphost_ssh_public_key" {
+  description = "SSH Public key"
+  type        = string
+}
