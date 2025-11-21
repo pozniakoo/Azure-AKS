@@ -32,6 +32,7 @@ resource "azurerm_key_vault" "akv" {
 
     secret_permissions = [
       "Get",
+      "Set",
     ]
 
     storage_permissions = [
