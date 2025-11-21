@@ -16,7 +16,7 @@ output "bastion_subnet_id" {
 }
 
 output "jumphost_subnet_id" {
-  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "jumphost-subnet-10.0.1.48/29"][0]
+  value = [for subnet in azurerm_virtual_network.vnet.subnet : subnet.id if subnet.name == "jumphost-subnet-10.0.1.48_29"][0]
 }
 
 output "network_rg_name" {
