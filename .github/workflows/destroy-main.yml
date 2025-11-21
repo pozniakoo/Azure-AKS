@@ -32,18 +32,16 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
               
-
-
             - name: 🛠️ Setup Terraform
               uses: hashicorp/setup-terraform@v3
+
+            - name: 🔄 Terraform Init
+              working-directory: ./Terraform
+              run: terraform init -reconfigure
 
             - name: force unlock #temporary
               id: unlock
               run: terraform force-unlock 92f38bf0-d86f-3cb3-2572-e82b5aa776cf
-
-            - name: 🔄 Terraform Init
-              working-directory: ./Terraform
-              run: terraform init
 
             - name: 💥 Terraform DESTROY 
               working-directory: ./Terraform
