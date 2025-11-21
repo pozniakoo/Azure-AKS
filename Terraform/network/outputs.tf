@@ -22,3 +22,8 @@ output "acr_dns_zone_name" {
 output "nat_gateway_id" {
   value = azurerm_nat_gateway.natgw.id
 }
+
+output "appgw_id" {
+  description = "ID of the application gateway used for AKS"
+  value = azurerm_application_gateway.appgw.id
+}

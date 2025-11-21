@@ -26,7 +26,8 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     type = "SystemAssigned"
   }
 
-  tags = {
+  ingress_application_gateway {
+    gateway_id = var.appgw_id
   }
 }
 

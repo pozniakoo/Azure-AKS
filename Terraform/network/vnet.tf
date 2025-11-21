@@ -89,13 +89,12 @@ resource "azurerm_subnet_nat_gateway_association" "natgw_subnet_association" {
 
 resource "azurerm_public_ip" "appgw_pip" {
   name                = "app-gateway-pip"
-  resource_group_name = var.location
-  location            = azurerm_resource_group.network_rg.name
+  resource_group_name = azurerm_resource_group.network_rg.name
+  location            = var.location
   allocation_method   = "Static"
   sku = "Standard"
 }
 
-# since these variables are re-used - a locals block makes this more maintainable
 locals {
   backend_address_pool_name      = "${azurerm_virtual_network.vnet.name}-beap"
   frontend_port_name             = "${azurerm_virtual_network.vnet.name}-feport"
@@ -107,7 +106,7 @@ locals {
 }
 
 resource "azurerm_application_gateway" "appgw" {
-  name                = "aks-app-gateway-${var.location}"
+  name                = "aks-app-gateway"
   resource_group_name = azurerm_resource_group.network_rg.name
   location            = var.location
 

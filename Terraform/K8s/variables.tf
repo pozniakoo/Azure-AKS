@@ -62,3 +62,8 @@ variable "kube_dns_ip" {
   description = "kube-dns IP address"
   type = string
 }
+
+variable "appgw_id" {
+  description = "Application gateway ID"
+  type = string
+}
