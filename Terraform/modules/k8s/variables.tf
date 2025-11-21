@@ -3,7 +3,7 @@ variable "location"{
     type = string
 }
 
-variable "rg_name" {
+variable "aks_rg_name" {
   description = "Resource Group name"
   type = string
 }
@@ -65,5 +65,14 @@ variable "kube_dns_ip" {
 
 variable "appgw_id" {
   description = "Application gateway ID"
+  type = string
+}
+
+variable "bastion_subnet_id" {
+  description = "BastionSubnet ID"
+  type = string
+}
+variable "jumphost_subnet_id" {
+  description = "JumphostSubnet ID"
   type = string
 }
